@@ -1,0 +1,65 @@
+@mixin btn-add-right($height) {
+    right: calc(($width-btn-add / 2) * -1);
+    top: calc(($height / 2) - ($height-btn-add / 2));
+}
+@mixin btn-add-bottom($width) {
+    right: calc(($width / 2) - ($width-btn-add / 2));
+    bottom: calc(($height-btn-add / 2) * -1);
+}
+
+.template {
+    border: 1px dashed black;
+    position: relative;
+
+    &:nth-child(1n+2) {
+        margin-top: 20px;
+    }
+    & .btn {
+        display: none;
+        position: absolute;
+    }
+    & .menu-elements {
+        display: none;
+        &.active {
+            position: absolute;
+            display: inline-block;
+            padding: 5px;
+            border-radius: 10px;
+            background-color: $grey;
+        }
+    }
+
+    &-header {
+        min-height: $height-template-header;
+        &.active .btn {
+            display: inline-block;
+            @include btn-add-right($height-template-header)
+        }
+        & .menu-elements.active {
+            right: calc((2.5% / 2) * -1);
+            top: calc(($height-template-header / 2) + ($height-btn-add / 2));
+        }
+    }
+    &-main {
+        min-height: $height-template-main;
+        &.active .btn {
+            display: inline-block;
+            @include btn-add-bottom($width-template-main);
+        }
+        & .menu-elements.active {
+            right: calc((100% / 2));
+            bottom: calc((($height-btn-add / 2) + $height-btn-add) * -1);
+        }
+    }
+    &-footer {
+        min-height: $height-template-footer;
+        &.active .btn {
+            display: inline-block;
+            @include btn-add-right($height-template-footer);
+        }
+        & .menu-elements.active {
+            right: calc((2.5% / 2) * -1);
+            top: calc(($height-template-footer / 2) + ($height-btn-add / 2));
+        }
+    }
+}

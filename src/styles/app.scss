@@ -1,0 +1,27 @@
+@import './variables';
+@import './buttons';
+@import './logo';
+@import './header';
+@import './template-menu';
+@import './template';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $light-grey;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}

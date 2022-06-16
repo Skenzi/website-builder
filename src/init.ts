@@ -1,4 +1,5 @@
-import { State } from './types/types';
+import './styles/app.scss';
+import { State, Elements } from './types/types';
 import watcherState from './watcherState';
 
 const addListenersMenuItems = (state: State) => {
@@ -6,7 +7,9 @@ const addListenersMenuItems = (state: State) => {
     menuItems.forEach((item) => {
         item.addEventListener('click', () => {
             const id = (item as HTMLElement).dataset.id;
-            console.log(id)
+            if(id) {
+                state.activeTemplate = id;
+            }
         })
     })
 }
@@ -15,7 +18,10 @@ const init = () => {
     const state: State = {
         activeTemplate: 'first'
     }
-    const watchedState = watcherState(state);
+    const elements: Elements = {
+        templateContainer: document.querySelector('.template-container'),
+    }
+    const watchedState = watcherState(state, elements);
     addListenersMenuItems(watchedState);
 }
 
