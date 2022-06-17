@@ -8,8 +8,9 @@
 }
 
 .template {
-    border: 1px dashed black;
+    display: flex;
     position: relative;
+    border: 1px dashed black;
 
     &:nth-child(1n+2) {
         margin-top: 20px;
@@ -26,6 +27,7 @@
             padding: 5px;
             border-radius: 10px;
             background-color: $grey;
+            z-index: 99999;
         }
     }
 

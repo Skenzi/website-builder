@@ -1,9 +1,52 @@
 import { Elements } from "./types/types";
 
-const addTemplateDropdown = (element: Element) => {
+interface MenuItem {
+    type: string,
+    content: string,
+}
+
+const clickHandler = (container: Element) => (elementType: string) => {
+    const element = document.createElement(elementType);
+    element.textContent = 'test';
+    container.appendChild(element);
+}
+
+const addMenuItems = (container: Element, menuItems: MenuItem[], handler: (elementType: string) => void) => {
+    for(const menuItem of menuItems) {
+        const element = document.createElement('button');
+        element.addEventListener('click', () => handler(menuItem.type));
+        element.textContent = menuItem.content;
+        container.appendChild(element);
+    }
+}
+
+const addTemplateDropdown = (container: Element, handler: (elementType: string) => void) => {
+    const menuItems = [
+        {
+            type: 'h1',
+            content: 'Заголовок h1'
+        },
+        {
+            type: 'h2',
+            content: 'Заголовок h2'
+        },
+        {
+            type: 'h3',
+            content: 'Заголовок h3'
+        },
+        {
+            type: 'p',
+            content: 'Абзац текста'
+        },
+        {
+            type: 'img',
+            content: 'Изображение'
+        }
+    ];
+
     const menuDiv = document.createElement('div');
-    menuDiv.textContent = '123';
     menuDiv.classList.add('menu-elements');
+    addMenuItems(menuDiv, menuItems, handler);
 
     const btnAdd = document.createElement('button');
     btnAdd.textContent = '+';
@@ -13,8 +56,7 @@ const addTemplateDropdown = (element: Element) => {
         menuDiv.classList.toggle('active');
     });
 
-    element.appendChild(btnAdd);
-    element.appendChild(menuDiv);
+    container.append(btnAdd, menuDiv);
 }
 
 const addListenerMouseHover = (element: Element) => {
@@ -30,21 +72,19 @@ const createTemplateLending = (elements: Elements) => {
     const header = document.createElement('header');
     header.classList.add('template', 'template-header')
     addListenerMouseHover(header);
-    addTemplateDropdown(header);
+    addTemplateDropdown(header, clickHandler(header));
 
     const main = document.createElement('main');
     main.classList.add('template', 'template-main')
     addListenerMouseHover(main);
-    addTemplateDropdown(main);
+    addTemplateDropdown(main, clickHandler(main));
 
     const footer = document.createElement('footer');
     footer.classList.add('template', 'template-footer')
     addListenerMouseHover(footer);
-    addTemplateDropdown(footer);
+    addTemplateDropdown(footer, clickHandler(footer));
 
-    elements.templateContainer?.appendChild(header);
-    elements.templateContainer?.appendChild(main);
-    elements.templateContainer?.appendChild(footer);
+    elements.templateContainer?.append(header, main, footer);
 }
 
 const buildTemplate = (activeTemplate: any, elements: Elements) => {
