@@ -14,7 +14,10 @@ const clickHandler = (container: Element) => (elementType: string) => {
 const addMenuItems = (container: Element, menuItems: MenuItem[], handler: (elementType: string) => void) => {
     for(const menuItem of menuItems) {
         const element = document.createElement('button');
-        element.addEventListener('click', () => handler(menuItem.type));
+        element.addEventListener('click', () => {
+            handler(menuItem.type);
+            container.classList.remove('active');
+        });
         element.textContent = menuItem.content;
         container.appendChild(element);
     }
@@ -47,6 +50,12 @@ const addTemplateDropdown = (container: Element, handler: (elementType: string) 
     const menuDiv = document.createElement('div');
     menuDiv.classList.add('menu-elements');
     addMenuItems(menuDiv, menuItems, handler);
+    menuDiv.addEventListener('mouseleave', () => {
+        menuDiv.classList.remove('active');
+    })
+    container.addEventListener('mouseleave', () => {
+        menuDiv.classList.remove('active');
+    })
 
     const btnAdd = document.createElement('button');
     btnAdd.textContent = '+';

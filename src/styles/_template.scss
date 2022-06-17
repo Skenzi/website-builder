@@ -33,6 +33,8 @@
 
     &-header {
         min-height: $height-template-header;
+        align-items: center;
+        padding: 5px 10px;
         &.active .btn {
             display: inline-block;
             @include btn-add-right($height-template-header)
