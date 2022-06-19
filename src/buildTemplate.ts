@@ -7,8 +7,21 @@ interface MenuItem {
 
 const clickHandler = (container: Element) => (elementType: string) => {
     const element = document.createElement(elementType);
+
+    const btnRemove = document.createElement('button');
+    btnRemove.textContent = 'X';
+    btnRemove.addEventListener('click', () => {
+        container.removeChild(element);
+        if(container.childElementCount <= 2) {
+            container.classList.remove('no-border');
+        }
+    })
+
     element.textContent = 'test';
+    element.append(btnRemove);
+
     container.appendChild(element);
+    container.classList.add('no-border')
 }
 
 const addMenuItems = (container: Element, menuItems: MenuItem[], handler: (elementType: string) => void) => {
