@@ -12,8 +12,8 @@
     position: relative;
     border: 1px dashed black;
 
-    &:nth-child(1n+2) {
-        margin-top: 20px;
+    &.active .btn {
+        display: inline-block;
     }
     & .btn {
         display: none;
@@ -33,37 +33,50 @@
 
     &-header {
         min-height: $height-template-header;
-        align-items: center;
         padding: 5px 10px;
+        margin-top: 20px;
+        align-items: center;
         &.active .btn {
-            display: inline-block;
-            @include btn-add-right($height-template-header)
+            @include btn-add-right(100%)
         }
         & .menu-elements.active {
             right: calc((2.5% / 2) * -1);
-            top: calc(($height-template-header / 2) + ($height-btn-add / 2));
+            top: calc((100% / 2) + ($height-btn-add / 2));
         }
     }
+
     &-main {
         min-height: $height-template-main;
+        display: flex;
+        margin: 20px 0;
+        gap: 10px;
         &.active .btn {
-            display: inline-block;
-            @include btn-add-bottom($width-template-main);
+            @include btn-add-bottom(100%);
         }
         & .menu-elements.active {
             right: calc((100% / 2));
             bottom: calc((($height-btn-add / 2) + $height-btn-add) * -1);
         }
+        &__item {
+            flex: 1;
+            &.active .btn {
+                @include btn-add-bottom(100%);
+            }
+        }
     }
+
+    &-blog-main .template-main__item:last-child {
+        flex: 2;
+    }
+
     &-footer {
         min-height: $height-template-footer;
         &.active .btn {
-            display: inline-block;
-            @include btn-add-right($height-template-footer);
+            @include btn-add-right(100%);
         }
         & .menu-elements.active {
             right: calc((2.5% / 2) * -1);
-            top: calc(($height-template-footer / 2) + ($height-btn-add / 2));
+            top: calc((100% / 2) + ($height-btn-add / 2));
         }
     }
 }

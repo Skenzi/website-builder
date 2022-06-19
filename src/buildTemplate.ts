@@ -96,6 +96,69 @@ const createTemplateLending = (elements: Elements) => {
     elements.templateContainer?.append(header, main, footer);
 }
 
+const createTemplateBlog = (elements: Elements) => {
+    const header = document.createElement('header');
+    header.classList.add('template', 'template-header')
+    addListenerMouseHover(header);
+    addTemplateDropdown(header, clickHandler(header));
+
+    const main = document.createElement('main');
+
+    const section1 = document.createElement('section');
+    section1.classList.add('template', 'template-main__item');
+    addListenerMouseHover(section1);
+    addTemplateDropdown(section1, clickHandler(section1));
+
+    const section2 = document.createElement('section');
+    section2.classList.add('template', 'template-main__item');
+    addListenerMouseHover(section2);
+    addTemplateDropdown(section2, clickHandler(section2));
+
+    main.append(section1, section2);
+    main.classList.add('template-main', 'template-blog-main')
+
+    const footer = document.createElement('footer');
+    footer.classList.add('template', 'template-footer')
+    addListenerMouseHover(footer);
+    addTemplateDropdown(footer, clickHandler(footer));
+
+    elements.templateContainer?.append(header, main, footer);
+}
+
+const createTemplateShop = (elements: Elements) => {
+    const header = document.createElement('header');
+    header.classList.add('template', 'template-header')
+    addListenerMouseHover(header);
+    addTemplateDropdown(header, clickHandler(header));
+
+    const main = document.createElement('main');
+
+    const section1 = document.createElement('section');
+    section1.classList.add('template', 'template-main__item');
+    addListenerMouseHover(section1);
+    addTemplateDropdown(section1, clickHandler(section1));
+
+    const section2 = document.createElement('section');
+    section2.classList.add('template', 'template-main__item');
+    addListenerMouseHover(section2);
+    addTemplateDropdown(section2, clickHandler(section2));
+
+    const section3 = document.createElement('section');
+    section3.classList.add('template', 'template-main__item');
+    addListenerMouseHover(section3);
+    addTemplateDropdown(section3, clickHandler(section3));
+
+    main.append(section1, section2, section3);
+    main.classList.add('template-main')
+
+    const footer = document.createElement('footer');
+    footer.classList.add('template', 'template-footer')
+    addListenerMouseHover(footer);
+    addTemplateDropdown(footer, clickHandler(footer));
+
+    elements.templateContainer?.append(header, main, footer);
+}
+
 const buildTemplate = (activeTemplate: any, elements: Elements) => {
     if(elements.templateContainer) {
         elements.templateContainer.textContent = '';
@@ -103,6 +166,18 @@ const buildTemplate = (activeTemplate: any, elements: Elements) => {
     switch(activeTemplate) {
         case 'lending': {
             createTemplateLending(elements);
+            break;
+        }
+        case 'blog': {
+            createTemplateBlog(elements);
+            break;
+        }
+        case 'shop': {
+            createTemplateShop(elements);
+            break;
+        }
+        default: {
+            new Error('Unexpected template: ' + activeTemplate)
         }
     }
 }
