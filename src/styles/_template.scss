@@ -1,10 +1,32 @@
-@mixin btn-add-right($height) {
-    right: calc(($width-btn-add / 2) * -1);
-    top: calc(($height / 2) - ($height-btn-add / 2));
+@mixin template-btn-add($side) {
+    & .btn-add {
+        display: none;
+        position: absolute;
+        @if $side == right {
+            right: calc(($width-btn-add / 2) * -1);
+            top: calc(50% - ($height-btn-add / 2));
+        }
+        @if $side == bottom {
+            right: calc(50% - ($width-btn-add / 2));
+            bottom: calc(($height-btn-add / 2) * -1);
+        }
+    }
+    &.active .btn-add {
+        display: block;
+    }
 }
-@mixin btn-add-bottom($width) {
-    right: calc(($width / 2) - ($width-btn-add / 2));
-    bottom: calc(($height-btn-add / 2) * -1);
+
+@mixin template-dropdown($side) {
+    & .dropdown-menu {
+        @if $side == right {
+            right: calc(($width-dropdown-menu / 2) * -1);
+            top: calc(50% + ($height-btn-add / 2));
+        }
+        @if $side == bottom {
+            right: calc(50% - ($width-dropdown-menu / 2));
+            bottom: calc((($height-btn-add) + 60%) * -1);
+        }
+    }
 }
 
 .template {
@@ -12,37 +34,12 @@
     position: relative;
     border: 1px dashed black;
 
-    &.active .btn {
-        display: inline-block;
-    }
-    & .btn {
-        display: none;
-        position: absolute;
-    }
-    & .menu-elements {
-        display: none;
-        &.active {
-            position: absolute;
-            display: inline-block;
-            padding: 5px;
-            border-radius: 10px;
-            background-color: $grey;
-            z-index: 99999;
-        }
-    }
-
     &-header {
         min-height: $height-template-header;
-        padding: 5px 10px;
         margin-top: 20px;
         align-items: center;
-        &.active .btn {
-            @include btn-add-right(100%)
-        }
-        & .menu-elements.active {
-            right: calc((2.5% / 2) * -1);
-            top: calc((100% / 2) + ($height-btn-add / 2));
-        }
+        @include template-btn-add(right);
+        @include template-dropdown(right);
     }
 
     &-main {
@@ -50,17 +47,12 @@
         display: flex;
         margin: 20px 0;
         gap: 10px;
-        &.active .btn {
-            @include btn-add-bottom(100%);
-        }
-        & .menu-elements.active {
-            right: calc((100% / 2));
-            bottom: calc((($height-btn-add / 2) + $height-btn-add) * -1);
-        }
+        @include template-btn-add(bottom);
+        @include template-dropdown(bottom);
         &__item {
             flex: 1;
             &.active .btn {
-                @include btn-add-bottom(100%);
+                
             }
         }
     }
@@ -71,13 +63,8 @@
 
     &-footer {
         min-height: $height-template-footer;
-        &.active .btn {
-            @include btn-add-right(100%);
-        }
-        & .menu-elements.active {
-            right: calc((2.5% / 2) * -1);
-            top: calc((100% / 2) + ($height-btn-add / 2));
-        }
+        @include template-btn-add(right);
+        @include template-dropdown(right);
     }
 }
 

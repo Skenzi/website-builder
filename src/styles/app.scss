@@ -4,6 +4,7 @@
 @import './header';
 @import './template-menu';
 @import './template';
+@import './dropdown';
 
 * {
     margin: 0;
@@ -15,13 +16,17 @@ body {
     background-color: $light-grey;
 }
 
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
 .container {
     max-width: 700px;
     margin: 0 auto;
 }
 
-button {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+.hidden {
+    display: none;
 }
