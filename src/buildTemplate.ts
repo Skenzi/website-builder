@@ -6,10 +6,13 @@ interface MenuItem {
 }
 
 const clickHandler = (container: Element) => (elementType: string) => {
-    const element = document.createElement(elementType);
+    const element = document.createElement('div');
+    const classElement = `template-${elementType}`;
+    element.classList.add('template-element', classElement);
 
     const btnRemove = document.createElement('button');
-    btnRemove.textContent = 'X';
+    btnRemove.textContent = 'x';
+    btnRemove.classList.add('hidden', 'btn', 'btn-rm');
     btnRemove.addEventListener('click', () => {
         container.removeChild(element);
         if(container.childElementCount <= 2) {
@@ -19,6 +22,13 @@ const clickHandler = (container: Element) => (elementType: string) => {
 
     element.textContent = 'test';
     element.append(btnRemove);
+    
+    element.addEventListener('mouseenter', () => {
+        btnRemove.classList.remove('hidden');
+    })
+    element.addEventListener('mouseleave', () => {
+        btnRemove.classList.add('hidden');
+    })
 
     container.appendChild(element);
     container.classList.add('no-border')

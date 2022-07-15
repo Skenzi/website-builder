@@ -24,19 +24,35 @@
         }
         @if $side == bottom {
             right: calc(50% - ($width-dropdown-menu / 2));
-            bottom: calc((($height-btn-add) + 60%) * -1);
+            bottom: calc(($height-btn-add + 60%) * -1);
         }
     }
+}
+
+@mixin dropdown-complex($side) {
+    @include template-btn-add($side);
+    @include template-dropdown($side);
 }
 
 .template {
     display: flex;
     position: relative;
     border: 1px dashed black;
-
+    &-element {
+        display: flex;
+        align-items: center;
+        &:hover {
+            border: 1px dotted black;
+        }
+    }
+    &-h1 {
+        font-size: 32px;
+        font-weight: bold;
+    }
     &-header {
         min-height: $height-template-header;
         margin-top: 20px;
+        padding: 5px 10px;
         align-items: center;
         @include template-btn-add(right);
         @include template-dropdown(right);
