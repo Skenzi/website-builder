@@ -24,7 +24,7 @@
         }
         @if $side == bottom {
             right: calc(50% - ($width-dropdown-menu / 2));
-            bottom: calc(($height-btn-add + 60%) * -1);
+            top: calc(($height-btn-add / 2 + 99%));
         }
     }
 }
@@ -38,12 +38,21 @@
     display: flex;
     position: relative;
     border: 1px dashed black;
+    &:hover {
+        border: 1px dotted black;
+    }
     &-element {
         display: flex;
         align-items: center;
+        background-color: aquamarine;
+        flex: 1;
+        height: 100%;
         &:hover {
             border: 1px dotted black;
         }
+    }
+    &-block {
+        position: relative;
     }
     &-h1 {
         font-size: 32px;
@@ -52,7 +61,6 @@
     &-header {
         min-height: $height-template-header;
         margin-top: 20px;
-        padding: 5px 10px;
         align-items: center;
         @include template-btn-add(right);
         @include template-dropdown(right);
